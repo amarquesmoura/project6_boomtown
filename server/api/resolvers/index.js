@@ -23,7 +23,7 @@ const { DateScalar } = require('../custom-types');
 
 module.exports = app => {
   return {
-    Date: DateScalar,
+    // Date: DateScalar,
 
     Query: {
       viewer() {
@@ -56,10 +56,12 @@ module.exports = app => {
         return [];
         // -------------------------------
       },
-      async tags() {
-        // @TODO: Replace this mock return statement with the correct tags from Postgres
-        return [];
-        // -------------------------------
+      async tags(parent, args, { pgResource }) {
+        try {
+          return await pgResource.getTags();
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       }
     },
 
