@@ -51,10 +51,12 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async items() {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        return [];
-        // -------------------------------
+      async items(parent, { filter }, { pgResource }) {
+        try {
+          return await pgResource.getItems(filter);
+        } catch (e) {
+          throw new ApolloError(e);
+        }
       },
       async tags(parent, args, { pgResource }) {
         try {
@@ -77,17 +79,20 @@ module.exports = app => {
        *
        */
       // @TODO: Uncomment these lines after you define the User type with these fields
-      // items() {
-      //   // @TODO: Replace this mock return statement with the correct items from Postgres
-      //   return []
-      //   // -------------------------------
-      // },
-      // borrowed() {
-      //   // @TODO: Replace this mock return statement with the correct items from Postgres
-      //   return []
-      //   // -------------------------------
-      // }
-      // -------------------------------
+      async items({ id }, args, { pgResource }) {
+        try {
+          return await pgResource.getItemsForUser(id);
+        } catch (e) {
+          throw new ApolloError(e);
+        }
+      },
+      async borrowed({ id }, args, { pgResource }) {
+        try {
+          return await pgResource.getBorrowedItemsForUser(id);
+        } catch (e) {
+          throw new ApolloError(e);
+        }
+      }
     },
 
     Item: {
