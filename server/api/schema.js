@@ -63,6 +63,7 @@ module.exports = gql`
     viewer: User
     items(filter: ID): [Item]
     tags: [Tag]
+    item(id: ID): Item
   }
 
   type Mutation {
