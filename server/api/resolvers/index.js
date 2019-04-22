@@ -85,23 +85,23 @@ module.exports = app => {
     },
 
     Item: {
-      async itemowner({ item }, args, { pgResource }) {
+      async itemowner({ itemowner }, args, { pgResource }) {
         try {
-          return await pgResource.getUserById(item.itemowner);
+          return await pgResource.getUserById(itemowner);
         } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async tags({ item }, args, { pgResource }) {
+      async tags({ id }, args, { pgResource }) {
         try {
-          return await pgResource.getTagsForItem(item.tags);
+          return await pgResource.getTagsForItem(id);
         } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async borrower({ item }, args, { pgResource }) {
+      async borrower({ borrower }, args, { pgResource }) {
         try {
-          return await pgResource.getUserById(item.borrower);
+          return await pgResource.getUserById(borrower);
         } catch (e) {
           throw new ApolloError(e);
         }
