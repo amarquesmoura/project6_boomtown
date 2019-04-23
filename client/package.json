@@ -38,5 +38,11 @@
   },
   "devDependencies": {
     "prettier": "1.13.7"
-  }
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
 }
