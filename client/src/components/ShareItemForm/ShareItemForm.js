@@ -10,6 +10,10 @@ import { Button } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Input } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
+import { Select } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
+import { ListItemText } from '@material-ui/core';
 import {
   updateItem,
   resetItem,
@@ -123,42 +127,70 @@ class ShareForm extends Component {
                 name="imageSelect"
                 id="imageSelect"
               />
-              <Field />
-              <FormControl>
-                <Field>
-                  {({ input, meta }) => {
-                    return (
-                      <Button size="medium" color="primary" variant="contained">
-                        <Typography>Select an Image</Typography>
-                      </Button>
-                    );
-                  }}
-                </Field>
-              </FormControl>
-              <FormControl>
-                <InputLabel htmlFor="title">Wadawada</InputLabel>
+              <FormControl fullWidth className={classes.formControl}>
+                <InputLabel htmlFor="title">Name your Item</InputLabel>
                 <Field name="title">
-                  {({ input, meta }) => <Input id="title" type="text" />}
-                </Field>
-              </FormControl>
-              <FormControl>
-                <Field name="description">
                   {({ input, meta }) => (
-                    <TextField
-                      id="description"
-                      placeholder="Wadawada"
-                      margin="normal"
-                      multiline
-                      rows="4"
-                      rowsMax="4"
+                    <Input
+                      id="title"
+                      type="text"
+                      inputProps={{
+                        ...input,
+                        autoComplete: 'off'
+                      }}
+                      value={input.value}
                     />
                   )}
                 </Field>
               </FormControl>
-              <FormControl>
+              <FormControl fullWidth className={classes.formControl}>
+                <Field name="description">
+                  {({ input, meta }) => (
+                    <TextField
+                      id="description"
+                      margin="normal"
+                      multiline
+                      rows="4"
+                      rowsMax="4"
+                      inputProps={{
+                        ...input,
+                        autoComplete: 'off'
+                      }}
+                      value={input.value}
+                    />
+                  )}
+                </Field>
+              </FormControl>
+              <Field name="tags">
+                {({ input, meta }) => {
+                  return (
+                    <Select
+                      multiple
+                      value={this.state.selectedTags}
+                      onChange={e => this.handleSelectTag(e)}
+                      renderValue={selected => {
+                        return this.generateTagsText(tags, selected);
+                      }}
+                    >
+                      {tags &&
+                        tags.map(tag => (
+                          <MenuItem key={tag.id} value={tag.id}>
+                            <Checkbox
+                              checked={
+                                this.state.selectedTags.indexOf(tag.id) > -1
+                              }
+                            />
+                            <ListItemText primary={tag.title} />
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  );
+                }}
+              </Field>
+              {/* <FormControl>
                 <InputLabel htmlFor="age-simple">Add some tags</InputLabel>
                 <Field name="tags" />
-              </FormControl>
+              </FormControl> */}
               <Button
                 type="submit"
                 variant="contained"

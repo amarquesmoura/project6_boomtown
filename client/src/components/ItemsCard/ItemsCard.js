@@ -23,7 +23,7 @@ class ItemsCard extends Component {
             {item.title}
           </Typography>
           <Typography color="textSecondary" gutterBottom>
-            {/* {item.tags} */}
+            {item.tags}
           </Typography>
           <Typography variant="subheading" gutterBottom>
             {item.description}

@@ -1,15 +1,4 @@
 import React from 'react';
-/* 
-  TODO: Create ShareItemFrom and ShareItemPreview in the components dir
-  and call them from this file.
-
-  ShareItemForm is the form that our User will use to add a new item 
-
-  When the user is filling ShareItemForm, we will show a preview of 
-  this item using the ShareItemPreview. 
-  Hint: It should look like any other Item card.
-
-*/
 import styles from './styles';
 import ShareItemForm from '../../components/ShareItemForm';
 import ShareItemPreview from '../../components/ShareItemPreview';
@@ -29,12 +18,11 @@ const Share = ({ tags, classes }) => {
         container
         direction="row"
         justify="center"
-        spacing={16}
+        spacing={24}
       >
-        <Grid className={classes.gridItem} item xs={4}>
+        <Grid className={classes.gridItem} item xs={12} sm={6}>
           <Grid container justify="center" spacing={Number(16)}>
             <ShareItemPreview tags={tags} />
-            <ShareItemForm tags={tags} />
           </Grid>
           <Grid className={classes.gridItem} item xs={4}>
             <ShareItemForm tags={tags} />
