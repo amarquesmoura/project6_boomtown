@@ -87,8 +87,7 @@ class ShareForm extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { classes } = this.props;
+    const { classes, tags } = this.props;
     return (
       <Form
         onSubmit={values => {
@@ -124,9 +123,7 @@ class ShareForm extends Component {
                 name="imageSelect"
                 id="imageSelect"
               />
-              <Field>
-                
-              </Field>
+              <Field />
               <FormControl>
                 <Field>
                   {({ input, meta }) => {
