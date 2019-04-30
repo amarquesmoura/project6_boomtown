@@ -44,6 +44,13 @@ class ShareForm extends Component {
     });
   };
 
+  generateTagsText(tags, selected) {
+    return tags
+      .map(t => (selected.indexOf(t.id) > -1 ? t.title : false))
+      .filter(e => e)
+      .join(', ');
+  }
+
   // convert array into array of objects
   applyTags(tags) {
     return (
@@ -139,6 +146,7 @@ class ShareForm extends Component {
                         autoComplete: 'off'
                       }}
                       value={input.value}
+                      onChange={this.props.updateItem({ title: input.value })}
                     />
                   )}
                 </Field>
@@ -157,6 +165,9 @@ class ShareForm extends Component {
                         autoComplete: 'off'
                       }}
                       value={input.value}
+                      onChange={this.props.updateItem({
+                        description: input.value
+                      })}
                     />
                   )}
                 </Field>
@@ -167,7 +178,7 @@ class ShareForm extends Component {
                     <Select
                       multiple
                       value={this.state.selectedTags}
-                      onChange={e => this.handleSelectTag(e)}
+                      onChange={e => this.handleSelectTags(e)}
                       renderValue={selected => {
                         return this.generateTagsText(tags, selected);
                       }}

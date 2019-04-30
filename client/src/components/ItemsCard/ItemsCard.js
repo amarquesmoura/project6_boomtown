@@ -19,7 +19,12 @@ class ItemsCard extends Component {
           avatar={<Gravatar email={item.itemowner.email} />}
         />
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
+          <Typography
+            placeholder="banana"
+            gutterBottom
+            variant="headline"
+            component="h2"
+          >
             {item.title}
           </Typography>
           <Typography color="textSecondary" gutterBottom>
