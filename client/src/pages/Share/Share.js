@@ -10,15 +10,35 @@ import React from 'react';
   Hint: It should look like any other Item card.
 
 */
-// import ShareItemForm from '../../components/ShareItemForm';
-// import ShareItemPreview from '../../components/ShareItemPreview';
+import ShareItemForm from '../../components/ShareItemForm';
+import ShareItemPreview from '../../components/ShareItemPreview';
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import Paper from '@material-ui/core/Paper';
 
-const Share = ({ classes }) => {
+const Share = ({ tags, classes }) => {
   return (
     <div>
-      <p>
-        This is the share page located at <code>/share</code>.
-      </p>
+      <Grid
+        className={classes.root}
+        container
+        direction="row"
+        justify="center"
+        spacing={16}
+      >
+        <Grid className={classes.gridItem} item xs={4}>
+          <Grid container justify="center" spacing={Number(16)}>
+            <ShareItemPreview tags={tags} />
+            <ShareItemForm tags={tags} />
+          </Grid>
+          <Grid className={classes.gridItem} item xs={4}>
+            <ShareItemForm tags={tags} />
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 };

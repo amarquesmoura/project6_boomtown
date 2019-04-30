@@ -47,7 +47,7 @@ class AccountForm extends Component {
             {/* @TODO: Wrap in a Final Form <Field /> */}
             <Input
               id="fullname"
-              type="text"
+              type="text" 
               inputProps={{
                 autoComplete: 'off'
               }}

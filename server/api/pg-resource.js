@@ -63,19 +63,7 @@ module.exports = postgres => {
         throw e;
       }
     },
-    async getItemById(id) {
-      const findItemQuery = {
-        text: `SELECT * FROM items WHERE id = $1`,
-        values: [id]
-      };
 
-      try {
-        const user = await postgres.query(findItemQuery);
-        return user.rows[0];
-      } catch (e) {
-        throw e;
-      }
-    },
     async getItems(idToOmit) {
       try {
         const items = await postgres.query({
@@ -119,7 +107,7 @@ module.exports = postgres => {
     },
     async getTagsForItem(id) {
       const tagsQuery = await {
-        text: `SELECT name 
+        text: `SELECT * 
         FROM 
           tags
           INNER JOIN itemtags
