@@ -3,11 +3,6 @@ const { gql } = require('apollo-server-express');
 /**
  *  @TODO: Boomtown Schema
  *
- * Define the types in your GraphQL schema here.
- * For each type, remove the `_: Boolean` placeholder and add the
- * fields as directed. Be sure to finish writing resolvers for all types
- * and any relational fields, where required.
- *
  * We will create the custom Date scalar together.
  */
 module.exports = gql`
@@ -44,6 +39,14 @@ module.exports = gql`
     itemid: ID!
   }
 
+  type Query {
+    user(id: ID!): User
+    viewer: User
+    items(filter: ID): [Item]
+    tags: [Tag]
+    item(id: ID): Item
+  }
+
   input AssignedTag {
     id: ID!
     title: String!
@@ -59,15 +62,21 @@ module.exports = gql`
     tags: [AssignedTag]!
   }
 
-  type Query {
-    user(id: ID!): User
-    viewer: User
-    items(filter: ID): [Item]
-    tags: [Tag]
-    item(id: ID): Item
+  input SignupInput {
+    fullname: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
   }
 
   type Mutation {
-    addItem: Boolean
+    login(user: LoginInput!): User!
+    logout: Boolean!
+    signup(user: SignupInput!): User!
+    addItem(item: NewItemInput!): Item
   }
 `;

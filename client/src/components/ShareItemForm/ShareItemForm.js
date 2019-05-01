@@ -14,6 +14,13 @@ import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
 import { ListItemText } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
+import { CloudDoneIcon } from '@material-ui/icons';
+import { Dialog } from '@material-ui/core';
+import { DialogActions } from '@material-ui/core';
+import { DialogContent } from '@material-ui/core';
+import { DialogContentText } from '@material-ui/core';
+import { DialogTitle } from '@material-ui/core';
 import {
   updateItem,
   resetItem,
@@ -83,6 +90,10 @@ class ShareForm extends Component {
     });
   };
 
+  componentWillUnmount() {
+    this.props.resetNewItem();
+  }
+
   dispatchUpdate(values, tags, updateItem) {
     if (!values.imageurl && this.state.fileSelected) {
       this.getBase64Url().then(imageurl => {
@@ -95,6 +106,43 @@ class ShareForm extends Component {
       ...values,
       tags: this.applyTags(tags)
     });
+  }
+
+  reset(form) {
+    form.reset();
+    this.setState({
+      fileSelected: false,
+      done: false,
+      selectedTags: []
+    });
+    this.props.resetNewItem();
+    this.resetFileInput();
+  }
+
+  async saveItem(values, tags, addItem) {
+    const {
+      validity,
+      files: [file]
+    } = this.fileInput.current;
+    if (validity.valid && file) {
+      try {
+        const itemData = {
+          ...values,
+          tags: this.applyTags(tags)
+        };
+        await addItem.mutation({
+          variables: {
+            item: itemData,
+            image: file
+          }
+        });
+        this.setState({ done: true });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log('No File...');
+    }
   }
 
   render() {
