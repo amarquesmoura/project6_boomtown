@@ -1,6 +1,7 @@
 const { ApolloServer } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 const jwt = require('jsonwebtoken');
+const { AuthDirective } = require('../api/custom-directives');
 
 const typeDefs = require('../api/schema');
 let resolvers = require('../api/resolvers');
@@ -8,7 +9,13 @@ let resolvers = require('../api/resolvers');
 module.exports = ({ app, pgResource }) => {
   resolvers = resolvers(app);
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+    schemaDirectives: {
+      auth: AuthDirective
+    }
+  });
 
   const apolloServer = new ApolloServer({
     context: ({ req }) => {
@@ -18,10 +25,9 @@ module.exports = ({ app, pgResource }) => {
         ? jwt.decode(encodedToken, app.get('JWT_SECRET'))
         : undefined;
 
-      console.log(token);
-
       return {
         req,
+        token,
         pgResource
         /**
          * @TODO: Provide Apollo context

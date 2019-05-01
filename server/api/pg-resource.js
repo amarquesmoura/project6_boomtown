@@ -124,7 +124,7 @@ module.exports = postgres => {
         throw e;
       }
     },
-    async saveNewItem({ item, user }) {
+    async saveNewItem({ item, image, user }) {
       /**
        *  @TODO: Adding a New Item
        *

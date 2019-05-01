@@ -66,7 +66,9 @@ module.exports = app => {
         });
 
         return {
-          id: user.id
+          id: user.id,
+          fullname: user.fullname,
+          email: user.email
         };
       } catch (e) {
         throw new AuthenticationError(e);
