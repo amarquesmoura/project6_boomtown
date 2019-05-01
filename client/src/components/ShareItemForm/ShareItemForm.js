@@ -135,7 +135,7 @@ class ShareForm extends Component {
                 id="imageSelect"
               />
               <FormControl fullWidth className={classes.formControl}>
-                <InputLabel htmlFor="title">Name your Item</InputLabel>
+                <InputLabel htmlFor="title" />
                 <Field name="title">
                   {({ input, meta }) => (
                     <Input

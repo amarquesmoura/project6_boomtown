@@ -37,14 +37,16 @@ export const ALL_ITEMS_QUERY = gql`
 
 export const ALL_USER_ITEMS_QUERY = gql`
   query user($id: ID!) {
-    fullname
-    bio
-    email
-    items {
-      ...ItemFields
-    }
-    borrowed {
-      ...ItemFields
+    user(id: $id) {
+      fullname
+      bio
+      email
+      items {
+        ...ItemFields
+      }
+      borrowed {
+        ...ItemFields
+      }
     }
   }
   ${ItemFields}
@@ -59,12 +61,13 @@ export const ALL_TAGS_QUERY = gql`
   }
 `;
 
-// export const ADD_ITEM_MUTATION = gql`
-//   # mutation addItem($item: NewItemInput!) {
-//   # @TODO: Pass the item and image into the addItem mutation as arguments
-//   # and return the new item id when the mutation is complete.
-//   # }
-// `;
+export const ADD_ITEM_MUTATION = gql`
+  mutation addItem($item: NewItemInput!, $image: Upload!) {
+    addItem(item: $item, image: $image) {
+      id
+    }
+  }
+`;
 
 /**
  * Auth-related queries and mutations.
