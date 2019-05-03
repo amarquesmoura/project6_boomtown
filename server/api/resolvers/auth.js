@@ -59,12 +59,6 @@ module.exports = app => {
           res: context.req.res
         });
 
-        setCookie({
-          tokenName: app.get('JWT_COOKIE_NAME'),
-          token: generateToken(user, app.get('JWT_SECRET')),
-          res: context.req.res
-        });
-
         return {
           id: user.id,
           fullname: user.fullname,

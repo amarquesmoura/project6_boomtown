@@ -1,11 +1,15 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import ItemsCard from '../ItemsCard';
+import ItemCard from '../ItemCard';
 import styles from './styles';
 import { connect } from 'react-redux';
 
 const ShareItemPreview = ({ shareItemPreview }) => {
-  return <ItemsCard item={shareItemPreview} />;
+  return (
+    <div>
+      <ItemCard item={shareItemPreview} />
+    </div>
+  );
 };
 
 const mapStateToProps = ({ shareItemPreview }) => ({ shareItemPreview });

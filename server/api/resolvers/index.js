@@ -1,18 +1,18 @@
 const { ApolloError } = require('apollo-server-express');
 
-// @TODO: Uncomment these lines later when we add auth
-// const jwt = require("jsonwebtoken")
+const jwt = require('jsonwebtoken');
 const AuthMutationsFunction = require('./auth');
 const { UploadScalar, DateScalar } = require('../custom-types');
 
 module.exports = app => {
   const authMutations = AuthMutationsFunction(app);
   return {
-    //Date: DateScalar,
+    // Upload: UploadScalar,
+    // Date: DateScalar,
     Query: {
       viewer(parent, args, context, info) {
         if (context.token) {
-          return jwt.decode(context.token, app.get('JWT_SECRET'));
+          return context.token;
         }
         return null;
       },

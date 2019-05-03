@@ -8,6 +8,13 @@ const styles = theme => ({
   },
   borrow: {
     marginBottom: theme.spacing.unit * 2
+  },
+  layout: {
+    width: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: 80,
+    paddingTop: 144
   }
 });
 

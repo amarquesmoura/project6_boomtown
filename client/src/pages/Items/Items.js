@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import ItemsGrid from '../../components/ItemsGrid/ItemsGrid';
+import ItemsContainer from './ItemsContainer';
+import styles from './styles';
 
-const Items = ({ classes }) => {
+const Items = ({ classes, items }) => {
   return (
-    <div>
-      <p>
-        This is the items page located at <code>/items</code>.
-      </p>
+    <div className={classes.root}>
+      <ItemsContainer>
+        {/* {({ itemsData: { items, loading } }) => {
+            return loading ? (
+              <FullScreenLoader inverted />
+            ) : ( */}
+        <ItemsGrid items={items} />
+        {/* ); */}
+        {/* }} */}
+      </ItemsContainer>
     </div>
   );
 };
 
 export default Items;
-

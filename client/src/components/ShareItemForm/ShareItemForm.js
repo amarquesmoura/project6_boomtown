@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styles from './styles';
 import { Form, Field, FormSpy } from 'react-final-form';
 import { Link } from 'react-router-dom';
-import { CardMedia } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
@@ -14,13 +13,6 @@ import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
 import { ListItemText } from '@material-ui/core';
-import { CircularProgress } from '@material-ui/core';
-import { CloudDoneIcon } from '@material-ui/icons';
-import { Dialog } from '@material-ui/core';
-import { DialogActions } from '@material-ui/core';
-import { DialogContent } from '@material-ui/core';
-import { DialogContentText } from '@material-ui/core';
-import { DialogTitle } from '@material-ui/core';
 import {
   updateItem,
   resetItem,
@@ -90,10 +82,6 @@ class ShareForm extends Component {
     });
   };
 
-  componentWillUnmount() {
-    this.props.resetNewItem();
-  }
-
   dispatchUpdate(values, tags, updateItem) {
     if (!values.imageurl && this.state.fileSelected) {
       this.getBase64Url().then(imageurl => {
@@ -108,51 +96,28 @@ class ShareForm extends Component {
     });
   }
 
-  reset(form) {
-    form.reset();
-    this.setState({
-      fileSelected: false,
-      done: false,
-      selectedTags: []
-    });
-    this.props.resetNewItem();
-    this.resetFileInput();
-  }
-
-  async saveItem(values, tags, addItem) {
-    const {
-      validity,
-      files: [file]
-    } = this.fileInput.current;
-    if (validity.valid && file) {
-      try {
-        const itemData = {
-          ...values,
-          tags: this.applyTags(tags)
-        };
-        await addItem.mutation({
-          variables: {
-            item: itemData,
-            image: file
-          }
-        });
-        this.setState({ done: true });
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      console.log('No File...');
-    }
-  }
-
   render() {
-    const { classes, tags } = this.props;
+    const { classes, tags, updateItem } = this.props;
+    const ITEM_PADDING_TOP = 8;
+    const ITEM_HEIGHT = 48;
+    const MenuProps = {
+      PaperProps: {
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+          width: 250
+        }
+      }
+    };
+    const onSubmit = values => {
+      this.saveItem(values, tags);
+    };
+
     return (
       <Form
         onSubmit={values => {
           this.saveItem(values, tags);
         }}
-        render={({ handleSubmit, pristine, invalid, form }) => {
+        render={({ handleSubmit, pristine, invalid, form, values }) => {
           return (
             <form onSubmit={handleSubmit} className={classes.formContainer}>
               <FormSpy
@@ -246,10 +211,6 @@ class ShareForm extends Component {
                   );
                 }}
               </Field>
-              {/* <FormControl>
-                <InputLabel htmlFor="age-simple">Add some tags</InputLabel>
-                <Field name="tags" />
-              </FormControl> */}
               <Button
                 type="submit"
                 variant="contained"

@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import Items from './Items';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-// import FullScreenLoader from '../../components/FullScreenLoader';
-// import { Query } from 'react-apollo';
-// import { } from '../../apollo/queries';
+//import FullScreenLoader from '../../components/FullScreenLoader';
+import { Query } from 'react-apollo';
+import {
+  ALL_TAGS_QUERY,
+  ALL_ITEMS_QUERY,
+  ALL_USER_ITEMS_QUERY,
+  ADD_ITEM_MUTATION
+} from '../../apollo/queries';
 
 class ItemsContainer extends Component {
   render() {

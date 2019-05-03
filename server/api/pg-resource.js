@@ -124,32 +124,8 @@ module.exports = postgres => {
         throw e;
       }
     },
-    async saveNewItem({ item, image, user }) {
-      /**
-       *  @TODO: Adding a New Item
-       *
-       *  Adding a new Item to Posgtres is the most advanced query.
-       *  It requires 3 separate INSERT statements.
-       *
-       *  All of the INSERT statements must:
-       *  1) Proceed in a specific order.
-       *  2) Succeed for the new Item to be considered added
-       *  3) If any of the INSERT queries fail, any successful INSERT
-       *     queries should be 'rolled back' to avoid 'orphan' data in the database.
-       *
-       *  To achieve #3 we'll ue something called a Postgres Transaction!
-       *  The code for the transaction has been provided for you, along with
-       *  helpful comments to help you get started.
-       *
-       *  Read the method and the comments carefully before you begin.
-       */
-
+    async saveNewItem({ item, user }) {
       return new Promise((resolve, reject) => {
-        /**
-         * Begin transaction by opening a long-lived connection
-         * to a client from the client pool.
-         * - Read about transactions here: https://node-postgres.com/features/transactions
-         */
         postgres.connect((err, client, done) => {
           try {
             // Begin postgres transaction
@@ -157,20 +133,27 @@ module.exports = postgres => {
               const { title, description, tags } = item;
 
               // Generate new Item query
-              // @TODO
-              // -------------------------------
+              const newItemQuery = `INSERT INTO items(title, description, itemowner) VALUES('${title}','${description}',${parseInt(
+                user.id
+              )}) RETURNING "id", "title", "imageurl", "description", "itemowner", "borrower", "created";`;
 
               // Insert new Item
-              // @TODO
-              // -------------------------------
+              const { rows } = await postgres.query({
+                text: newItemQuery
+              });
 
               // Generate tag relationships query (use the'tagsQueryString' helper function provided)
-              // @TODO
-              // -------------------------------
+              const newItem = rows[0];
+              const tagIds = tags.map(tag => tag.id);
+              const tagRelationQuery =
+                `INSERT INTO itemtags(tagid, itemid) VALUES ` +
+                tagsQueryString(tagIds, newItem.id, '');
 
               // Insert tags
-              // @TODO
-              // -------------------------------
+              await postgres.query({
+                text: tagRelationQuery,
+                values: tagIds ? tagIds : []
+              });
 
               // Commit the entire transaction!
               client.query('COMMIT', err => {
@@ -179,9 +162,7 @@ module.exports = postgres => {
                 }
                 // release the client back to the pool
                 done();
-                // Uncomment this resolve statement when you're ready!
-                // resolve(newItem.rows[0])
-                // -------------------------------
+                resolve(newItem.rows[0]);
               });
             });
           } catch (e) {
