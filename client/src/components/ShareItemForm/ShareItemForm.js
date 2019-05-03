@@ -19,6 +19,7 @@ import {
   resetImage
 } from '../../redux/ShareItemPreview/reducer';
 import { connect } from 'react-redux';
+import { ADD_ITEM_MUTATION } from '../../apollo/queries';
 
 class ShareForm extends Component {
   constructor(props) {
@@ -108,14 +109,11 @@ class ShareForm extends Component {
         }
       }
     };
-    const onSubmit = values => {
-      this.saveItem(values, tags);
-    };
 
     return (
       <Form
         onSubmit={values => {
-          this.saveItem(values, tags);
+          this.saveItem(values, tags, addItem);
         }}
         render={({ handleSubmit, pristine, invalid, form, values }) => {
           return (
