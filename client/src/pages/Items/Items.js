@@ -8,13 +8,13 @@ const Items = ({ classes, items }) => {
   return (
     <div className={classes.root}>
       <ItemsContainer>
-        {/* {({ itemsData: { items, loading } }) => {
-            return loading ? (
-              <FullScreenLoader inverted />
-            ) : ( */}
-        <ItemsGrid items={items} />
-        {/* ); */}
-        {/* }} */}
+        {({ itemsData: { items, loading } }) => {
+          return loading ? (
+            <FullScreenLoader inverted />
+          ) : (
+            <ItemsGrid items={items} />
+          );
+        }}
       </ItemsContainer>
     </div>
   );

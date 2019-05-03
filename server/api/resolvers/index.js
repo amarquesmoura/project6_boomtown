@@ -8,7 +8,7 @@ module.exports = app => {
   const authMutations = AuthMutationsFunction(app);
   return {
     // Upload: UploadScalar,
-    // Date: DateScalar,
+    Date: DateScalar,
     Query: {
       viewer(parent, args, context, info) {
         if (context.token) {

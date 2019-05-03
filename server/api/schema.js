@@ -1,10 +1,5 @@
 const { gql } = require('apollo-server-express');
 
-/**
- *  @TODO: Boomtown Schema
- *
- * We will create the custom Date scalar together.
- */
 module.exports = gql`
   scalar Date
 
@@ -22,7 +17,7 @@ module.exports = gql`
     itemowner: User!
     tags: [Tag]
     borrower: User
-    created: String
+    created: Date!
   }
 
   type User @auth {
