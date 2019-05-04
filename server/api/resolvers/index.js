@@ -87,8 +87,9 @@ module.exports = app => {
         try {
           image = await image;
           const user = context.token.id;
+          console.log('user id:', user);
           const newItem = await context.pgResource.saveNewItem({
-            item,
+            item: item,
             image,
             user
           });

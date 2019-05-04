@@ -1,10 +1,4 @@
 function tagsQueryString(tags, itemid, result) {
-  /**
-   * Challenge:
-   * This function is more than a little complicated.
-   *  - Can you refactor it to be simpler / more readable?
-   *  - Is this
-   */
   const length = tags.length;
   return length === 0
     ? `${result};`
@@ -133,9 +127,7 @@ module.exports = postgres => {
               const { title, description, tags } = item;
 
               // Generate new Item query
-              const newItemQuery = `INSERT INTO items(title, description, itemowner) VALUES('${title}','${description}',${parseInt(
-                user.id
-              )}) RETURNING "id", "title", "imageurl", "description", "itemowner", "borrower", "created";`;
+              const newItemQuery = `INSERT INTO items(title, description, itemowner) VALUES('${title}','${description}',${user}) RETURNING *`;
 
               // Insert new Item
               const { rows } = await postgres.query({
@@ -143,12 +135,13 @@ module.exports = postgres => {
               });
 
               // Generate tag relationships query (use the'tagsQueryString' helper function provided)
+              console.log(rows[0].id);
               const newItem = rows[0];
               const tagIds = tags.map(tag => tag.id);
               const tagRelationQuery =
                 `INSERT INTO itemtags(tagid, itemid) VALUES ` +
-                tagsQueryString(tagIds, newItem.id, '');
-
+                tagsQueryString([...tagIds], newItem.id, '');
+              console.log(tagRelationQuery);
               // Insert tags
               await postgres.query({
                 text: tagRelationQuery,
@@ -162,7 +155,7 @@ module.exports = postgres => {
                 }
                 // release the client back to the pool
                 done();
-                resolve(newItem.rows[0]);
+                resolve(newItem);
               });
             });
           } catch (e) {

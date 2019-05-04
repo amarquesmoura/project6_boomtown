@@ -80,6 +80,7 @@ module.exports = gql`
     login(user: LoginInput!): User!
     logout: Boolean!
     signup(user: SignupInput!): User!
-    addItem(item: NewItemInput!): Item @auth
+    addItem(item: NewItemInput!): Item
   }
 `;
+// add auth to addItem
