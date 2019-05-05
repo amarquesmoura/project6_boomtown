@@ -1,23 +1,27 @@
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Fade from '@material-ui/core/Fade';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-import styles from './styles';
-
-const FullScreenLoader = ({ classes, inverted }) => {
-  const color = !inverted ? 'secondary' : 'primary';
-  return (
-    <Fade in>
-      <div className={classes.container}>
-        <CircularProgress size={80} color={color} />
-        <Typography variant="title" color={color}>
-          “For it is in giving that we receive.”
-        </Typography>
-      </div>
-    </Fade>
-  );
+const styles = {
+  root: {
+    flexGrow: 1
+  }
 };
 
-export default withStyles(styles)(FullScreenLoader);
+function LinearIndeterminate(props) {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <LinearProgress />
+      <br />
+      <LinearProgress color="secondary" />
+    </div>
+  );
+}
+
+LinearIndeterminate.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(LinearIndeterminate);
