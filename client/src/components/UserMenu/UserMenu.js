@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 import { ListItemIcon } from '@material-ui/core/';
 import { ListItemText } from '@material-ui/core/';
 
-const options = ['Your Profile', 'Sign Out'];
-
 const ITEM_HEIGHT = 48;
 
 class LongMenu extends React.Component {
@@ -52,14 +50,6 @@ class LongMenu extends React.Component {
             }
           }}
         >
-          {/* {options.map(option => (
-            <MenuItem
-              key={option}
-              selected={option === 'Pyxis'}
-              onClick={this.handleClose}
-            >
-              {option}
-            </MenuItem> */}
           <MenuItem
             component={props => (
               <li {...props}>

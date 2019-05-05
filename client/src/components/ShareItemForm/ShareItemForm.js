@@ -112,16 +112,6 @@ class ShareForm extends Component {
 
   render() {
     const { classes, tags, updateItem } = this.props;
-    const ITEM_PADDING_TOP = 8;
-    const ITEM_HEIGHT = 48;
-    const MenuProps = {
-      PaperProps: {
-        style: {
-          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-          width: 250
-        }
-      }
-    };
 
     return (
       <ViewerContext.Consumer>

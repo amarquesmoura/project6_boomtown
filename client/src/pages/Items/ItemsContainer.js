@@ -5,12 +5,7 @@ import styles from './styles';
 import FullScreenLoader from '../../components/FullScreenLoader';
 import { ViewerContext } from '../../context/ViewerProvider';
 import { Query } from 'react-apollo';
-import {
-  ALL_TAGS_QUERY,
-  ALL_ITEMS_QUERY,
-  ALL_USER_ITEMS_QUERY,
-  ADD_ITEM_MUTATION
-} from '../../apollo/queries';
+import { ALL_ITEMS_QUERY } from '../../apollo/queries';
 
 class ItemsContainer extends Component {
   render() {

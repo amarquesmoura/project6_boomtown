@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import ShareItemForm from '../components/ShareItemForm/ShareItemForm';
 import Items from '../pages/Items';
 import Home from '../pages/Home';
 import Share from '../pages/Share';

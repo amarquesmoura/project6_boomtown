@@ -6,13 +6,12 @@ import { CardContent } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import { CardActions } from '@material-ui/core';
 import { CardHeader } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 
-const ItemCard = ({ classes, item, breakpoints }) => {
+const ItemCard = ({ classes, item }) => {
   return (
     <Card className={classes.card}>
       <CardMedia

@@ -1,7 +1,6 @@
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Fade from '@material-ui/core/Fade';
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
@@ -12,11 +11,7 @@ const FullScreenLoader = ({ classes, inverted }) => {
   return (
     <Fade in>
       <div className={classes.container}>
-        <CircularProgress
-          className={classes.progress}
-          size={80}
-          color={color}
-        />
+        <CircularProgress size={80} color={color} />
         <Typography variant="title" color={color}>
           “For it is in giving that we receive.”
         </Typography>

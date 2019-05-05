@@ -10,8 +10,8 @@ const ItemsGrid = ({ classes, items }) => {
       <Grid container spacing={24}>
         {items.map((item, i) => {
           return (
-            <Grid item xs={12} md={6} lg={4}>
-              <ItemCard item={item} key={item.id} />
+            <Grid item xs={12} md={6} lg={4} key={item.id}>
+              <ItemCard item={item} />
             </Grid>
           );
         })}
