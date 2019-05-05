@@ -19,7 +19,10 @@ import {
   resetImage
 } from '../../redux/ShareItemPreview/reducer';
 import { connect } from 'react-redux';
-import { ADD_ITEM_MUTATION } from '../../apollo/queries';
+import { ADD_ITEM_MUTATION, ALL_ITEMS_QUERY } from '../../apollo/queries';
+import { ViewerContext } from '../../context/ViewerProvider';
+import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router';
 
 class ShareForm extends Component {
   constructor(props) {
@@ -97,6 +100,16 @@ class ShareForm extends Component {
     });
   }
 
+  triggerInputFile = () => this.fileInput.current.click();
+  saveItem = async (values, tags, addItem) => {
+    try {
+      const newItem = { ...values, tags: this.applyTags(tags) };
+      await addItem({ variables: { item: newItem } });
+    } catch (e) {
+      throw Error(e);
+    }
+  };
+
   render() {
     const { classes, tags, updateItem } = this.props;
     const ITEM_PADDING_TOP = 8;
@@ -111,120 +124,152 @@ class ShareForm extends Component {
     };
 
     return (
-      <Form
-        onSubmit={values => {
-          this.saveItem(values, tags, addItem);
-        }}
-        render={({ handleSubmit, pristine, invalid, form, values }) => {
+      <ViewerContext.Consumer>
+        {({ loading, viewer }) => {
           return (
-            <form onSubmit={handleSubmit} className={classes.formContainer}>
-              <FormSpy
-                subscription={{ values: true }}
-                component={({ values }) => {
-                  if (values) {
-                    this.dispatchUpdate(values, tags, updateItem);
-                  }
-                  return '';
-                }}
-              />
-              <Typography variant="display2" className={classes.headline}>
-                Share. Borrow. Prosper.
-              </Typography>
-              <Button
-                onClick={this.triggerInputFile}
-                variant="contained"
-                className={classes.button}
-              >
-                SELECT AN IMAGE
-              </Button>
-              <input
-                hidden
-                ref={this.fileInput}
-                onChange={e => this.handleSelectFile(e)}
-                type="file"
-                name="imageSelect"
-                id="imageSelect"
-              />
-              <FormControl fullWidth className={classes.formControl}>
-                <InputLabel htmlFor="title" />
-                <Field name="title">
-                  {({ input, meta }) => (
-                    <Input
-                      id="title"
-                      type="text"
-                      inputProps={{
-                        ...input,
-                        autoComplete: 'off'
-                      }}
-                      value={input.value}
-                      onChange={this.props.updateItem({ title: input.value })}
-                    />
-                  )}
-                </Field>
-              </FormControl>
-              <FormControl fullWidth className={classes.formControl}>
-                <Field name="description">
-                  {({ input, meta }) => (
-                    <TextField
-                      id="description"
-                      margin="normal"
-                      multiline
-                      rows="4"
-                      rowsMax="4"
-                      inputProps={{
-                        ...input,
-                        autoComplete: 'off'
-                      }}
-                      value={input.value}
-                      onChange={this.props.updateItem({
-                        description: input.value
-                      })}
-                    />
-                  )}
-                </Field>
-              </FormControl>
-              <Field name="tags">
-                {({ input, meta }) => {
-                  return (
-                    <Select
-                      multiple
-                      value={this.state.selectedTags}
-                      onChange={e => this.handleSelectTags(e)}
-                      renderValue={selected => {
-                        return this.generateTagsText(tags, selected);
-                      }}
-                    >
-                      {tags &&
-                        tags.map(tag => (
-                          <MenuItem key={tag.id} value={tag.id}>
-                            <Checkbox
-                              checked={
-                                this.state.selectedTags.indexOf(tag.id) > -1
-                              }
-                            />
-                            <ListItemText primary={tag.title} />
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  );
-                }}
-              </Field>
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                color="primary"
-              >
-                Share
-              </Button>
-              <Button color="primary">Add Another Item</Button>
-              <Button autoFocus color="secondary">
-                <Link to="/items">Back to Items Page</Link>
-              </Button>
-            </form>
+            <Mutation
+              refetchQueries={() => [
+                { query: ALL_ITEMS_QUERY, variables: { id: viewer.id } }
+              ]}
+              mutation={ADD_ITEM_MUTATION}
+            >
+              {(addItem, { data }) => (
+                <Form
+                  onSubmit={values => {
+                    this.saveItem(values, tags, addItem);
+                    this.props.history.push('/items');
+                  }}
+                  render={({
+                    handleSubmit,
+                    pristine,
+                    invalid,
+                    form,
+                    values
+                  }) => {
+                    return (
+                      <form
+                        onSubmit={handleSubmit}
+                        className={classes.formContainer}
+                      >
+                        <FormSpy
+                          subscription={{ values: true }}
+                          component={({ values }) => {
+                            if (values) {
+                              this.dispatchUpdate(values, tags, updateItem);
+                            }
+                            return '';
+                          }}
+                        />
+                        <Typography
+                          variant="display2"
+                          className={classes.headline}
+                        >
+                          Share. Borrow. Prosper.
+                        </Typography>
+                        <Button
+                          onClick={this.triggerInputFile}
+                          variant="contained"
+                          className={classes.button}
+                        >
+                          SELECT AN IMAGE
+                        </Button>
+                        <input
+                          hidden
+                          ref={this.fileInput}
+                          onChange={e => this.handleSelectFile(e)}
+                          type="file"
+                          name="imageSelect"
+                          id="imageSelect"
+                        />
+                        <FormControl fullWidth className={classes.formControl}>
+                          <InputLabel htmlFor="title" />
+                          <Field name="title">
+                            {({ input, meta }) => (
+                              <Input
+                                id="title"
+                                type="text"
+                                inputProps={{
+                                  ...input,
+                                  autoComplete: 'off'
+                                }}
+                                value={input.value}
+                                onChange={this.props.updateItem({
+                                  title: input.value
+                                })}
+                              />
+                            )}
+                          </Field>
+                        </FormControl>
+                        <FormControl fullWidth className={classes.formControl}>
+                          <Field name="description">
+                            {({ input, meta }) => (
+                              <TextField
+                                id="description"
+                                margin="normal"
+                                multiline
+                                rows="4"
+                                rowsMax="4"
+                                inputProps={{
+                                  ...input,
+                                  autoComplete: 'off'
+                                }}
+                                value={input.value}
+                                onChange={this.props.updateItem({
+                                  description: input.value
+                                })}
+                              />
+                            )}
+                          </Field>
+                        </FormControl>
+                        <Field name="tags">
+                          {({ input, meta }) => {
+                            return (
+                              <Select
+                                multiple
+                                value={this.state.selectedTags}
+                                onChange={e => this.handleSelectTags(e)}
+                                renderValue={selected => {
+                                  return this.generateTagsText(tags, selected);
+                                }}
+                              >
+                                {tags &&
+                                  tags.map(tag => (
+                                    <MenuItem key={tag.id} value={tag.id}>
+                                      <Checkbox
+                                        checked={
+                                          this.state.selectedTags.indexOf(
+                                            tag.id
+                                          ) > -1
+                                        }
+                                      />
+                                      <ListItemText primary={tag.title} />
+                                    </MenuItem>
+                                  ))}
+                              </Select>
+                            );
+                          }}
+                        </Field>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          size="large"
+                          color="primary"
+                        >
+                          Share
+                        </Button>
+                        <Button color="primary">Add Another Item</Button>
+                        <Button autoFocus color="secondary">
+                          <Link to="/items">Back to Items Page</Link>
+                        </Button>
+                      </form>
+                    );
+                  }}
+                />
+              )}
+            </Mutation>
           );
         }}
-      />
+      </ViewerContext.Consumer>
     );
   }
 }
@@ -244,4 +289,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(withStyles(styles)(ShareForm));
+)(withRouter(withStyles(styles)(ShareForm)));

@@ -10,7 +10,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import React, { Component } from 'react';
 
-import AuthContainer from '../../Containers/AuthContainer';
 import styles from './styles';
 
 class MainMenu extends Component {
@@ -31,54 +30,52 @@ class MainMenu extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AuthContainer>
-          {({ logout }) => (
-            <React.Fragment>
-              <IconButton
-                aria-owns={anchorEl ? 'fade-menu' : null}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="fade-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.handleClose}
-              >
-                <MenuItem
-                  onClick={this.handleClose}
-                  component={props => (
-                    <li {...props}>
-                      <Link to="/profile" className={classes.buttonLink}>
-                        <ListItemIcon className={classes.icon}>
-                          <FingerprintIcon />
-                        </ListItemIcon>
+        {({ logout }) => (
+          <React.Fragment>
+            <IconButton
+              aria-owns={anchorEl ? 'fade-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="fade-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}
+            >
+              <MenuItem
+                onClick={this.handleClose}
+                component={props => (
+                  <li {...props}>
+                    <Link to="/profile" className={classes.buttonLink}>
+                      <ListItemIcon className={classes.icon}>
+                        <FingerprintIcon />
+                      </ListItemIcon>
 
-                        <ListItemText
-                          classes={{ primary: classes.primary }}
-                          inset
-                          primary="Your Profile"
-                        />
-                      </Link>
-                    </li>
-                  )}
+                      <ListItemText
+                        classes={{ primary: classes.primary }}
+                        inset
+                        primary="Your Profile"
+                      />
+                    </Link>
+                  </li>
+                )}
+              />
+              <MenuItem onClick={logout.mutation}>
+                <ListItemIcon className={classes.icon}>
+                  <PowerSettingsNewIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary="Sign Out"
                 />
-                <MenuItem onClick={logout.mutation}>
-                  <ListItemIcon className={classes.icon}>
-                    <PowerSettingsNewIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    classes={{ primary: classes.primary }}
-                    inset
-                    primary="Sign Out"
-                  />
-                </MenuItem>
-              </Menu>
-            </React.Fragment>
-          )}
-        </AuthContainer>
+              </MenuItem>
+            </Menu>
+          </React.Fragment>
+        )}
       </div>
     );
   }

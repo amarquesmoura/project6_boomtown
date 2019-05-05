@@ -11,22 +11,16 @@ const FullScreenLoader = ({ classes, inverted }) => {
   const color = !inverted ? 'secondary' : 'primary';
   return (
     <Fade in>
-      <Grid
-        container
-        className={classes.loader}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
+      <div className={classes.container}>
         <CircularProgress
           className={classes.progress}
-          size={50}
+          size={80}
           color={color}
         />
         <Typography variant="title" color={color}>
           “For it is in giving that we receive.”
         </Typography>
-      </Grid>
+      </div>
     </Fade>
   );
 };

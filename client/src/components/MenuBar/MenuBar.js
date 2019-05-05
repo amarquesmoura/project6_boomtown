@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import MainMenu from '../MainMenu';
+import UserMenu from '../UserMenu/UserMenu';
 import styles from './styles';
 
 import logo from '../../images/boomtown.svg';
@@ -45,7 +45,7 @@ class MenuBar extends Component {
                 Share Something
               </Button>
             </Slide>
-            <MainMenu />
+            <UserMenu />
           </div>
         </Toolbar>
       </AppBar>

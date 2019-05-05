@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Share from '../pages/Share';
 import { ViewerContext } from '../context/ViewerProvider';
 import FullScreenLoader from '../components/FullScreenLoader';
+import MenuBar from '../components/MenuBar';
 const Profile = ({ match }) => (
   <div>
     <Switch>
@@ -38,7 +39,7 @@ export default () => (
         }
         return (
           <Fragment>
-            {/* <MenuBar /> */}
+            <MenuBar />
             <Switch>
               <Route exact path="/items" component={Items} />
               <Route exact path="/share" component={Share} />
