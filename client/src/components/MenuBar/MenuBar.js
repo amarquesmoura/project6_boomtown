@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import React, { Component } from 'react';
-import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import UserMenu from '../UserMenu/UserMenu';
@@ -15,7 +14,7 @@ import logo from '../../images/boomtown.svg';
 
 class MenuBar extends Component {
   render() {
-    const { classes, history, location } = this.props;
+    const { classes, history } = this.props;
     return (
       <AppBar position="sticky">
         <Toolbar>
@@ -29,22 +28,16 @@ class MenuBar extends Component {
             </Link>
           </IconButton>
           <div className={classes.flex}>
-            <Slide
-              direction="left"
-              in={location.pathname !== '/share'}
-              unmountOnExit
+            <Button
+              size="small"
+              className={classes.button}
+              onClick={() => {
+                history.push('/share');
+              }}
             >
-              <Button
-                size="small"
-                className={classes.button}
-                onClick={() => {
-                  history.push('/share');
-                }}
-              >
-                <AddCircleIcon className={classes.shareicon} />
-                Share Something
-              </Button>
-            </Slide>
+              <AddCircleIcon className={classes.shareicon} />
+              Share Something
+            </Button>
             <UserMenu />
           </div>
         </Toolbar>

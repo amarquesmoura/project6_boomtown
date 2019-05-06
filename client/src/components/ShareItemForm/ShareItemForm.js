@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import { Form, Field, FormSpy } from 'react-final-form';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
@@ -152,7 +151,7 @@ class ShareForm extends Component {
                         />
                         <Typography
                           variant="display2"
-                          className={classes.headline}
+                          className={classes.tagline}
                         >
                           Share. Borrow. Prosper.
                         </Typography>
@@ -171,7 +170,7 @@ class ShareForm extends Component {
                           name="imageSelect"
                           id="imageSelect"
                         />
-                        <FormControl fullWidth className={classes.formControl}>
+                        <FormControl fullWidth className={classes.form}>
                           <InputLabel htmlFor="title" />
                           <Field name="title">
                             {({ input, meta }) => (
@@ -190,7 +189,7 @@ class ShareForm extends Component {
                             )}
                           </Field>
                         </FormControl>
-                        <FormControl fullWidth className={classes.formControl}>
+                        <FormControl fullWidth className={classes.form}>
                           <Field name="description">
                             {({ input, meta }) => (
                               <TextField
@@ -215,6 +214,7 @@ class ShareForm extends Component {
                           {({ input, meta }) => {
                             return (
                               <Select
+                                className={classes.form}
                                 multiple
                                 value={this.state.selectedTags}
                                 onChange={e => this.handleSelectTags(e)}
@@ -246,10 +246,6 @@ class ShareForm extends Component {
                           color="primary"
                         >
                           Share
-                        </Button>
-                        <Button color="primary">Add Another Item</Button>
-                        <Button autoFocus color="secondary">
-                          <Link to="/items">Back to Items Page</Link>
                         </Button>
                       </form>
                     );

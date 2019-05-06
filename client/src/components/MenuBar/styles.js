@@ -1,9 +1,4 @@
 const styles = theme => ({
-  flex: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
   logoButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -11,6 +6,11 @@ const styles = theme => ({
   },
   logo: {
     maxWidth: '100%'
+  },
+  flex: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   button: {
     marginRight: theme.spacing.unit * 2,

@@ -20,20 +20,18 @@ const ItemCard = ({ classes, item }) => {
         title={item.title}
       />
       <CardHeader
-        className={classes.itemCardGravatarImage}
         title={item.itemowner.fullname}
         avatar={
-          <Avatar round="true" className={classes.avatar}>
+          <Avatar round="true">
             <Gravatar email={item.itemowner.email} />
           </Avatar>
         }
-        title={item.itemowner.fullname}
       />
       <CardContent>
         <Typography gutterBottom variant="headline" component="h2">
           {item.title}
         </Typography>
-        <Typography color="textSecondary" gutterBottom>
+        <Typography className={classes.tags} gutterBottom>
           {item.tags && item.tags.map(t => t.title).join(', ')}
         </Typography>
         <Typography variant="subheading" gutterBottom>

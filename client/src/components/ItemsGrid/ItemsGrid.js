@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 
 const ItemsGrid = ({ classes, items }) => {
   return (
-    <div className={classes.layout}>
+    <div>
       <Grid container spacing={24}>
         {items.map((item, i) => {
           return (

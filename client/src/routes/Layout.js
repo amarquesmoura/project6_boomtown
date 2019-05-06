@@ -24,30 +24,28 @@ const Profile = ({ match }) => (
 );
 
 export default () => (
-  <Fragment>
-    <ViewerContext.Consumer>
-      {({ viewer, loading }) => {
-        if (loading) return <FullScreenLoader />;
-        if (!viewer) {
-          return (
-            <Switch>
-              <Route exact path="/welcome" component={Home} />
-              <Redirect from="*" to="/welcome" />
-            </Switch>
-          );
-        }
+  <ViewerContext.Consumer>
+    {({ viewer, loading }) => {
+      if (loading) return <FullScreenLoader />;
+      if (!viewer) {
         return (
-          <Fragment>
-            <MenuBar />
-            <Switch>
-              <Route exact path="/items" component={Items} />
-              <Route exact path="/share" component={Share} />
-              <Route path="/profile" component={Profile} />
-              <Redirect from="*" to="/items" />
-            </Switch>
-          </Fragment>
+          <Switch>
+            <Route exact path="/welcome" component={Home} />
+            <Redirect from="*" to="/welcome" />
+          </Switch>
         );
-      }}
-    </ViewerContext.Consumer>
-  </Fragment>
+      }
+      return (
+        <Fragment>
+          <MenuBar />
+          <Switch>
+            <Route exact path="/items" component={Items} />
+            <Route exact path="/share" component={Share} />
+            <Route path="/profile" component={Profile} />
+            <Redirect from="*" to="/items" />
+          </Switch>
+        </Fragment>
+      );
+    }}
+  </ViewerContext.Consumer>
 );

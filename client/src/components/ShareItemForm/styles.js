@@ -1,23 +1,22 @@
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexFlow: 'column nowrap'
+  formContainer: {
+    width: 400
   },
-  longItem: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '100%'
+  tagline: {
+    color: 'black'
   },
-  shortItem: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    marginTop: 20,
-    width: 100
+  button: {
+    margin: theme.spacing.unit,
+    backgroundColor: '#f9a825',
+    width: 400,
+    marginTop: 48
   },
-  heading: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '100%'
+  form: {
+    margin: theme.spacing.unit,
+    width: 400
+  },
+  input: {
+    display: 'none'
   }
 });
 

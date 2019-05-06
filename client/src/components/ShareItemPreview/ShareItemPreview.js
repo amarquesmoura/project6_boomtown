@@ -5,11 +5,7 @@ import styles from './styles';
 import { connect } from 'react-redux';
 
 const ShareItemPreview = ({ shareItemPreview }) => {
-  return (
-    <div>
-      <ItemCard item={shareItemPreview} />
-    </div>
-  );
+  return <ItemCard item={shareItemPreview} />;
 };
 
 const mapStateToProps = ({ shareItemPreview }) => ({ shareItemPreview });

@@ -1,22 +1,19 @@
 const styles = theme => ({
+  root: {
+    display: 'flex'
+  },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
-  itemCardGravatarImage: {
-    borderRadius: '50%'
-  },
   media: {
     height: 0,
     paddingTop: '56.25%'
   },
-  itemTitle: {
-    fontWeight: 600
-  },
-  borrow: {
-    marginBottom: theme.spacing.unit * 1.5
+  button: {
+    marginBottom: theme.spacing.unit
   }
 });
 

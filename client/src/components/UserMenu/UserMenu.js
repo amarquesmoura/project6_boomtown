@@ -11,7 +11,7 @@ import { ListItemText } from '@material-ui/core/';
 
 const ITEM_HEIGHT = 48;
 
-class LongMenu extends React.Component {
+class UserMenu extends React.Component {
   state = {
     anchorEl: null
   };
@@ -57,7 +57,6 @@ class LongMenu extends React.Component {
                   <ListItemIcon>
                     <FingerprintIcon />
                   </ListItemIcon>
-
                   <ListItemText inset primary="Your Profile" />
                 </Link>
               </li>
@@ -76,4 +75,4 @@ class LongMenu extends React.Component {
   }
 }
 
-export default LongMenu;
+export default UserMenu;
