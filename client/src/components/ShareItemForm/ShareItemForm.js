@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import styles from './styles';
 import { Form, Field, FormSpy } from 'react-final-form';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import { Input } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
-import { Checkbox } from '@material-ui/core';
-import { ListItemText } from '@material-ui/core';
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  Input,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
+} from '@material-ui/core';
 import {
   updateItem,
   resetItem,

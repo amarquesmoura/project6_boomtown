@@ -1,14 +1,16 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core/';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import {
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem
+} from '@material-ui/core/';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { Link } from 'react-router-dom';
-import { ListItemIcon } from '@material-ui/core/';
-import { ListItemText } from '@material-ui/core/';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
 import styles from './styles';

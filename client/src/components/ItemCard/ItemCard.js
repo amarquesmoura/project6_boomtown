@@ -1,14 +1,16 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import { Card } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
-import { CardMedia } from '@material-ui/core';
-import { CardActions } from '@material-ui/core';
-import { CardHeader } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { Avatar } from '@material-ui/core';
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CardHeader,
+  Typography
+} from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 import PropTypes from 'prop-types';
 

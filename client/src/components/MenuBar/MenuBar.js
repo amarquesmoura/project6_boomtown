@@ -1,15 +1,11 @@
 import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, Button, IconButton, Toolbar } from '@material-ui/core';
 import React, { Component } from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
 import PropTypes from 'prop-types';
 import UserMenu from '../UserMenu/UserMenu';
 import styles from './styles';
-
 import logo from '../../images/boomtown.svg';
 
 class MenuBar extends Component {
