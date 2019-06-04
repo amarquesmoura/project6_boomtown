@@ -1,4 +1,5 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from '@material-ui/core/';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -8,6 +9,9 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { Link } from 'react-router-dom';
 import { ListItemIcon } from '@material-ui/core/';
 import { ListItemText } from '@material-ui/core/';
+import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
+import { graphql, compose } from 'react-apollo';
+import styles from './styles';
 
 const ITEM_HEIGHT = 48;
 
@@ -27,6 +31,7 @@ class UserMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const { logoutMutation } = this.props;
 
     return (
       <div>
@@ -62,7 +67,7 @@ class UserMenu extends React.Component {
               </li>
             )}
           />
-          <MenuItem>
+          <MenuItem onClick={logoutMutation}>
             <ListItemIcon>
               <PowerSettingsNewIcon />
             </ListItemIcon>
@@ -75,4 +80,18 @@ class UserMenu extends React.Component {
   }
 }
 
-export default UserMenu;
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+
+export default compose(
+  graphql(LOGOUT_MUTATION, {
+    options: {
+      refetchQueries
+    },
+    name: 'logoutMutation'
+  }),
+  withStyles(styles)
+)(UserMenu);
