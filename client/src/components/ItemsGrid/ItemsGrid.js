@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import ItemCard from '../ItemCard/ItemCard';
 import { Grid } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const ItemsGrid = ({ classes, items }) => {
   return (
@@ -18,6 +19,11 @@ const ItemsGrid = ({ classes, items }) => {
       </Grid>
     </div>
   );
+};
+
+ItemsGrid.propTypes = {
+  classes: PropTypes.object.isRequired,
+  items: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ItemsGrid);

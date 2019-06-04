@@ -22,6 +22,7 @@ import { ADD_ITEM_MUTATION, ALL_ITEMS_QUERY } from '../../apollo/queries';
 import { ViewerContext } from '../../context/ViewerProvider';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 
 class ShareForm extends Component {
   constructor(props) {
@@ -259,6 +260,12 @@ class ShareForm extends Component {
     );
   }
 }
+
+ShareForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
+  updateItem: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => ({
   updateItem(item) {

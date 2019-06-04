@@ -12,6 +12,7 @@ import { ListItemText } from '@material-ui/core/';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
 import styles from './styles';
+import PropTypes from 'prop-types';
 
 const ITEM_HEIGHT = 48;
 
@@ -79,6 +80,10 @@ class UserMenu extends React.Component {
     );
   }
 }
+
+UserMenu.propTypes = {
+  logoutMutation: PropTypes.func.isRequired
+};
 
 const refetchQueries = [
   {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Profile = ({ classes }) => {
   return (
@@ -8,6 +9,10 @@ const Profile = ({ classes }) => {
       </p>
     </div>
   );
+};
+
+Home.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default Profile;

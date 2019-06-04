@@ -10,6 +10,7 @@ import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
+import PropTypes from 'prop-types';
 
 const ItemCard = ({ classes, item }) => {
   return (
@@ -45,6 +46,11 @@ const ItemCard = ({ classes, item }) => {
       </CardActions>
     </Card>
   );
+};
+
+ItemCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ItemCard);

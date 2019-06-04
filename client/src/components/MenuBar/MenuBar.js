@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import React, { Component } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import PropTypes from 'prop-types';
 import UserMenu from '../UserMenu/UserMenu';
 import styles from './styles';
 
@@ -45,5 +45,10 @@ class MenuBar extends Component {
     );
   }
 }
+
+MenuBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default withRouter(withStyles(styles)(MenuBar));
