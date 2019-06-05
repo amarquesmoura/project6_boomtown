@@ -13,23 +13,27 @@ import {
 } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ItemCard = ({ classes, item }) => {
+  const userProfile = `/profile/${item.itemowner.id}`;
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={item.imageurl}
-        title={item.title}
-      />
-      <CardHeader
-        title={item.itemowner.fullname}
-        avatar={
-          <Avatar round="true">
-            <Gravatar email={item.itemowner.email} />
-          </Avatar>
-        }
-      />
+      <Link to={userProfile}>
+        <CardMedia
+          className={classes.media}
+          image={item.imageurl}
+          title={item.title}
+        />
+        <CardHeader
+          title={item.itemowner.fullname}
+          avatar={
+            <Avatar round="true">
+              <Gravatar email={item.itemowner.email} />
+            </Avatar>
+          }
+        />
+      </Link>
       <CardContent>
         <Typography gutterBottom variant="headline" component="h2">
           {item.title}

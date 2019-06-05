@@ -185,9 +185,6 @@ class ShareForm extends Component {
                                   autoComplete: 'off'
                                 }}
                                 value={input.value}
-                                onChange={this.props.updateItem({
-                                  title: input.value
-                                })}
                               />
                             )}
                           </Field>
@@ -206,9 +203,6 @@ class ShareForm extends Component {
                                   autoComplete: 'off'
                                 }}
                                 value={input.value}
-                                onChange={this.props.updateItem({
-                                  description: input.value
-                                })}
                               />
                             )}
                           </Field>

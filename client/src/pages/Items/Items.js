@@ -12,7 +12,7 @@ const Items = ({ classes, items }) => {
 
 Items.propTypes = {
   classes: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 };
 
 export default Items;

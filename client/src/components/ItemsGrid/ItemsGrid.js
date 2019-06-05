@@ -23,7 +23,7 @@ const ItemsGrid = ({ classes, items }) => {
 
 ItemsGrid.propTypes = {
   classes: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(ItemsGrid);

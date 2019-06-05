@@ -46,6 +46,6 @@ export default (state = initialState, action) => {
         imageurl: initialState.imageurl
       };
     default:
-      return state;
+      return { ...state };
   }
 };
