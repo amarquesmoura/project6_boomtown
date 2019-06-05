@@ -129,7 +129,6 @@ class ShareForm extends Component {
                 <Form
                   onSubmit={values => {
                     this.saveItem(values, tags, addItem);
-                    this.props.history.push('/items');
                   }}
                   render={({
                     handleSubmit,
@@ -140,7 +139,11 @@ class ShareForm extends Component {
                   }) => {
                     return (
                       <form
-                        onSubmit={handleSubmit}
+                        onSubmit={values => {
+                          handleSubmit(values);
+                          form.reset();
+                          this.props.resetItem();
+                        }}
                         className={classes.formContainer}
                       >
                         <FormSpy

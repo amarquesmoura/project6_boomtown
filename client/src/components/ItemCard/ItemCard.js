@@ -14,43 +14,48 @@ import {
 import Gravatar from 'react-gravatar';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { ViewerContext } from '../../context/ViewerProvider';
 
 const ItemCard = ({ classes, item }) => {
   const userProfile = `/profile/${item.itemowner.id}`;
   return (
-    <Card className={classes.card}>
-      <Link to={userProfile}>
-        <CardMedia
-          className={classes.media}
-          image={item.imageurl}
-          title={item.title}
-        />
-        <CardHeader
-          title={item.itemowner.fullname}
-          avatar={
-            <Avatar round="true">
-              <Gravatar email={item.itemowner.email} />
-            </Avatar>
-          }
-        />
-      </Link>
-      <CardContent>
-        <Typography gutterBottom variant="headline" component="h2">
-          {item.title}
-        </Typography>
-        <Typography className={classes.tags} gutterBottom>
-          {item.tags && item.tags.map(t => t.title).join(', ')}
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
-          {item.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button variant="outlined" className={classes.button}>
-          Borrow
-        </Button>
-      </CardActions>
-    </Card>
+    <ViewerContext.Consumer>
+      {({ viewer }) => (
+        <Card className={classes.card}>
+          <Link to={userProfile}>
+            <CardMedia
+              className={classes.media}
+              image={item.imageurl}
+              title={item.title}
+            />
+            <CardHeader
+              title={item.itemowner.fullname || viewer.fullname}
+              avatar={
+                <Avatar round="true">
+                  <Gravatar email={item.itemowner.email || viewer.email} />
+                </Avatar>
+              }
+            />
+          </Link>
+          <CardContent>
+            <Typography gutterBottom variant="headline" component="h2">
+              {item.title}
+            </Typography>
+            <Typography className={classes.tags} gutterBottom>
+              {item.tags && item.tags.map(t => t.title).join(', ')}
+            </Typography>
+            <Typography variant="subheading" gutterBottom>
+              {item.description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button variant="outlined" className={classes.button}>
+              Borrow
+            </Button>
+          </CardActions>
+        </Card>
+      )}
+    </ViewerContext.Consumer>
   );
 };
 
