@@ -48,9 +48,13 @@ module.exports = app => {
           args.user.email
         );
 
+        if (!user) {
+          throw 'User is not found.';
+        }
+
         const valid = await bcrypt.compare(password, user.password);
 
-        if (!valid || !user) throw 'User was not found.';
+        if (!valid || !user) throw 'User or Password is incorrect.';
 
         const encodedToken = generateToken(user, app.get('JWT_SECRET'));
         setCookie({
