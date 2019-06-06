@@ -40,7 +40,7 @@ In this project, I learned modern techonologies for integrating the back-end. He
 
 ## Instructions for running the server
 
-You will need a SQL database for this project and connect it to Apollo. Commands must be run from the `server` directory:
+You will need a PostgreSQL database for this project. Commands must be run from the `server` directory:
 
 ### Installation
 
