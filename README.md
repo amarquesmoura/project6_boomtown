@@ -8,11 +8,11 @@ This is a full stack project at RED Academy App Developer Program. It is a websi
 
 ![Items Page](screenshots/Boomtown_2.png)
 
-![Share Page](screenshots/Boomtown_3.png)
-
 ## About the Author
 
-I am an experienced Product Manager working in the Tech Industry. I participated in the initiation and launch of 4 startups. I am currently sharpening my skills by learning about the latest Web Technologies at RED Academy - Vancouver.
+### Andre Marques Moura
+
+I am an experienced Product Manager working in the Tech Industry. I participated in the initiation and launch of 4 startups. I am currently sharpening my skills by learning about the latest Web Technologies at RED Academy - Vancouver. You can connect with me on LinkedIn [here](https://www.linkedin.com/in/andre-marques-moura).
 
 ## Main Takeaways
 
@@ -28,9 +28,19 @@ In this project, I learned modern techonologies for integrating the back-end. He
 - Material UI makes Web and App development much more productive by provinding you with a library of components to be used to create common interface elements.
 - JSX (XHTML in JavaScript) and JSS (CSS in JavaScript) gives ypu the opportunity to use XHTML and CSS in a much more programmatic way.
 
+## Technologies Used
+
+- React JS
+- Redux
+- Apollo
+- GraphQL
+- PostgreSQL
+- Express
+- NodeJS
+
 ## Instructions for running the server
 
-Commands must be run from the `server` directory:
+You will need a SQL database for this project and connect it to Apollo. Commands must be run from the `server` directory:
 
 ### Installation
 
