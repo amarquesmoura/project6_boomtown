@@ -5,8 +5,8 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ShareItemPreview = ({ shareItemPreview }) => {
-  return <ItemCard item={shareItemPreview} />;
+const ShareItemPreview = ({ classes, shareItemPreview }) => {
+  return <ItemCard className={classes.itemCard} item={shareItemPreview} />;
 };
 
 const mapStateToProps = ({ shareItemPreview }) => ({ shareItemPreview });

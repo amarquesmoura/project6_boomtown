@@ -34,7 +34,7 @@ class UserMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    const { logoutMutation } = this.props;
+    const { classes, logoutMutation } = this.props;
 
     return (
       <div>
@@ -53,23 +53,20 @@ class UserMenu extends React.Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
+              maxHeight: ITEM_HEIGHT * 5.5,
               width: 200
             }
           }}
+          className={classes.root}
         >
-          <MenuItem
-            component={props => (
-              <li {...props}>
-                <Link to="/profile">
-                  <ListItemIcon>
-                    <FingerprintIcon />
-                  </ListItemIcon>
-                  <ListItemText inset primary="Your Profile" />
-                </Link>
-              </li>
-            )}
-          />
+          <Link to="/profile" className={classes.link}>
+            <MenuItem key={'Profile'} onClick={this.handleClose}>
+              <ListItemIcon>
+                <FingerprintIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="Your Profile" />
+            </MenuItem>
+          </Link>
           <MenuItem onClick={logoutMutation}>
             <ListItemIcon>
               <PowerSettingsNewIcon />

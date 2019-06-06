@@ -161,13 +161,22 @@ class ShareForm extends Component {
                         >
                           Share. Borrow. Prosper.
                         </Typography>
-                        <Button
-                          onClick={this.triggerInputFile}
-                          variant="contained"
-                          className={classes.button}
-                        >
-                          SELECT AN IMAGE
-                        </Button>
+                        {this.state.fileSelected ? (
+                          <Button
+                            onClick={this.resetFileInput}
+                            className={classes.resetButton}
+                          >
+                            RESET AN IMAGE
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={this.triggerInputFile}
+                            variant="contained"
+                            className={classes.button}
+                          >
+                            SELECT AN IMAGE
+                          </Button>
+                        )}
                         <input
                           hidden
                           ref={this.fileInput}
@@ -180,33 +189,35 @@ class ShareForm extends Component {
                           <InputLabel htmlFor="title" />
                           <Field name="title">
                             {({ input, meta }) => (
-                              <Input
-                                id="title"
-                                type="text"
-                                inputProps={{
-                                  ...input,
-                                  autoComplete: 'off'
-                                }}
-                                value={input.value}
-                              />
+                              <div>
+                                <TextField
+                                  className={classes.textField}
+                                  type="text"
+                                  {...input}
+                                  placeholder="Name your Item"
+                                />
+                                {meta.touched &&
+                                  meta.error && <span>{meta.error}</span>}
+                              </div>
                             )}
                           </Field>
                         </FormControl>
                         <FormControl fullWidth className={classes.form}>
                           <Field name="description">
                             {({ input, meta }) => (
-                              <TextField
-                                id="description"
-                                margin="normal"
-                                multiline
-                                rows="4"
-                                rowsMax="4"
-                                inputProps={{
-                                  ...input,
-                                  autoComplete: 'off'
-                                }}
-                                value={input.value}
-                              />
+                              <div>
+                                <TextField
+                                  id="standard-textarea"
+                                  className={classes.textField}
+                                  multiline
+                                  rows="5"
+                                  type="text"
+                                  {...input}
+                                  placeholder="Describe your Item"
+                                />
+                                {meta.touched &&
+                                  meta.error && <span>{meta.error}</span>}
+                              </div>
                             )}
                           </Field>
                         </FormControl>
@@ -214,7 +225,7 @@ class ShareForm extends Component {
                           {({ input, meta }) => {
                             return (
                               <Select
-                                className={classes.form}
+                                className={classes.formControl}
                                 multiple
                                 value={this.state.selectedTags}
                                 onChange={e => this.handleSelectTags(e)}
@@ -244,6 +255,7 @@ class ShareForm extends Component {
                           variant="contained"
                           size="large"
                           color="primary"
+                          className={classes.share}
                         >
                           Share
                         </Button>

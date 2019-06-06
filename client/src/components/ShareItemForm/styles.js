@@ -6,17 +6,37 @@ const styles = theme => ({
     color: 'black'
   },
   button: {
-    margin: theme.spacing.unit,
     backgroundColor: '#f9a825',
     width: 400,
-    marginTop: 48
+    padding: 0,
+    marginTop: 50
+  },
+  resetButton: {
+    backgroundColor: '#e0e0e0',
+    width: 400,
+    padding: 0,
+    marginTop: 50
   },
   form: {
-    margin: theme.spacing.unit,
-    width: 400
+    width: 400,
+    padding: 0,
+    marginTop: 50
   },
   input: {
-    display: 'none'
+    display: 'none',
+    padding: 0
+  },
+  textField: {
+    width: 400,
+    padding: 0
+  },
+  formControl: {
+    width: 400,
+    margin: 0,
+    padding: 0
+  },
+  share: {
+    marginTop: 100
   }
 });
 

@@ -1,6 +1,7 @@
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center'
   },
   card: {
     height: '100%',

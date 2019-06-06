@@ -5,20 +5,20 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     width: '100%',
     height: '100%',
-    padding: 80,
+    paddingTop: 150,
     paddingLeft: '10%',
     paddingRight: '10%',
     justifyContent: 'center'
   },
   itemPreview: {
-    maxWidth: 480,
+    maxWidth: '100%',
     width: '50%',
     height: '100%',
     paddingLeft: 50,
-    paddingRight: 0,
-    paddingTop: 40
+    paddingRight: 40
   },
   shareForm: {
+    maxWidth: '100%',
     width: '50%',
     height: '100%',
     paddingLeft: 50,

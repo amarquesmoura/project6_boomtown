@@ -8,8 +8,5 @@ export default createMuiTheme({
     secondary: {
       main: '#212121'
     }
-  },
-  spacing: {
-    unit: '1.5 rem'
   }
 });
